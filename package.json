@@ -1,0 +1,12 @@
+{
+  "name": "krishna-learn",
+  "version": "1.0.0",
+  "description": "Krishna learning and teaching server files",
+  "license": "ISC",
+  "author": "Krishna",
+  "type": "commonjs", 
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}
