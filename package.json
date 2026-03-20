@@ -4,9 +4,12 @@
   "description": "Krishna learning and teaching server files",
   "license": "ISC",
   "author": "Krishna",
-  "type": "commonjs", 
-  "main": "server/server.js",
+  "type": "commonjs",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
