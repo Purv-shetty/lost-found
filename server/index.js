@@ -2,13 +2,6 @@ const express = require("express");
 
 const app = express();
 const port = 4000;
-app.listen(port, function () {
-  console.log(`Server Is Running at port ${port}`);
-});
-
-app.get('/', (req, res) => {
-  res.send('Hello World from Express!');
-});
 
 /* 
 Basic Routing
@@ -27,12 +20,7 @@ Express provides simple methods to define routes that correspond to HTTP methods
 
 // Respond to GET request on the root route
 app.get('/', (req, res) => {
-  res.send('GET request to the homepage');
-});
-
-// Respond to POST request on the root route
-app.post('/', (req, res) => {
-  res.send('POST request to the homepage');
+  res.send('POORVI LOVES KRISHNA');
 });
 
 // Respond to GET request on the /about route
@@ -40,13 +28,52 @@ app.get('/about', (req, res) => {
   res.send('About page');
 });
 
-// Catch all other routes
-app.all('*', (req, res) => {
-  res.status(404).send('404 - Page not found');
-});
 
 app.put('/about/:id', (req,res)=>{
   const id = req.params.id
   console.log(id)
   res.send("Updated")
 })
+
+app.get('/search', (req, res) => {
+  // Access query parameters using req.query
+  const { q, category } = req.query;
+  console.log(req.query)
+  res.send(`Search query: ${q}, Category: ${category || 'none'}`);
+});
+
+const logger = (req,res,next)=>{
+  console.log('First')
+  next()
+}
+
+const protected = (req, res, next)=>{
+  const userLogin = ({
+    isLogin : false,
+    username: "Krishna"
+  })
+
+  if(userLogin.isLogin){
+    next()
+  }else{
+    return res.send({message: "login before"})
+  }
+}
+app.use(logger);
+
+app.use(protected)
+// Respond to POST request on the root route
+app.post('/', (req, res) => {
+  res.send('POST request to the homepage');
+});
+
+// Catch all other routes
+app.all('/{*splat}', (req, res) => {
+  res.status(404).send('404 - Page not found');
+});
+
+
+app.listen(port, function () {
+  console.log(`Server Is Running at port ${port}`);
+});
+
